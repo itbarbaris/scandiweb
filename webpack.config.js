@@ -1,20 +1,51 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const port = process.env.PORT || 3000;
+const isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  mode: 'development',
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  mode: isDev ? 'development' : 'production',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
+  devtool: 'inline-source-map',
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
+  },
+  optimization: {
+    minimizer: [new TerserPlugin()],
+  },
   module: {
     rules: [
       {
-        test: /\.(jsx|js)$/,
-        include: path.resolve(__dirname, 'src'),
+        test: /\.(js)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: 'babel-loader',
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+    }),
+  ],
+  devServer: {
+    host: 'localhost',
+    historyApiFallback: true,
+    open: true,
+    hot: true,
+    port,
   },
 };
