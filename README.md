@@ -17,4 +17,6 @@ I assume that there will always be at least two or more children passed to slide
 
 Slider accepts `className` as props, so you can style the component for your liking.  
 
-By default Slider takes 100% width/height so its parent should have width and height set.
+By default Slider takes 100% width/height so its parent should have width and height set.  
+
+## [Live](https://competent-jepsen-4867d2.netlify.app/)
