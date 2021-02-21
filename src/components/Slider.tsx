@@ -13,10 +13,13 @@ const SliderWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
 
     button {
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       background-color: transparent;
       border: none;
       padding: 10px;
@@ -25,13 +28,19 @@ const SliderWrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      position: absolute;
+      z-index: 2;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+
+      &:last-child {
+        right: 0;
+      }
 
       span {
         display: block;
-        width: 100%;
-        height: 100%;
-        max-width: 20px;
-        max-height: 20px;
+        width: 20px;
+        height: 20px;
       }
 
       &:focus {
@@ -184,7 +193,6 @@ const Slider: React.FC<ISliderProps> = ({ children, className }) => {
             const cn = cx({
               slide: true,
               active: idx === index,
-              prev: idx === index - 1 || (index === 0 && idx === children.length - 1),
             });
             return (
               <article className={cn} key={idx}>
