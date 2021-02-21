@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Slider from './components/Slider';
 import styled, { createGlobalStyle } from 'styled-components';
 import Image from './components/Image';
+import Cat1 from '../public/static/images/1.jpeg';
+import Cat2 from '../public/static/images/2.jpeg';
+import Cat3 from '../public/static/images/3.jpeg';
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -68,9 +71,9 @@ const App: React.FC = () => {
       )}
       {currentComp === 1 && (
         <Slider className='gallery'>
-          <Image src='../public/imgs/1.jpeg' />
-          <Image src='../public/imgs/2.jpeg' />
-          <Image src='../public/imgs/3.jpeg' />
+          <Image src={Cat1} />
+          <Image src={Cat2} />
+          <Image src={Cat3} />
         </Slider>
       )}
     </>

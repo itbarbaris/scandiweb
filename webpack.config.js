@@ -11,6 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   devtool: 'inline-source-map',
   resolve: {
@@ -33,6 +34,18 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|svg|jpg|gif|jpe?g)$/,
+        use: [
+          {
+            options: {
+              name: '[name].[ext]',
+              outputPath: './public/static/images/',
+            },
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },
